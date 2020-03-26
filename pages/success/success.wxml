@@ -1,0 +1,83 @@
+<block wx:if="{{result.status == 3}}">
+    <view class="header_error">
+        <image class="state_icon" src="../images/Icons_done2.png"></image>
+        <view class="state_error_text">超过限制次数</view>
+        <view class="state_error_info">您今日已经超过出入限制次数，无法进入该地区</view>
+    </view>
+</block>
+<block wx:else>
+    <view class="header_state">
+        <block wx:if="{{result.status == 1}}">
+            <image class="state_icon" src="../images/Icons_complete.png"></image>
+            <view class="state_text">提交成功</view>
+        </block>
+        <block wx:if="{{result.status == 2}}">
+            <image class="state_icon" src="../images/Icons_wait.png"></image>
+            <view class="state_text">审核中</view>
+        </block>
+    </view>
+    <view class="header">
+        <view class="number_txt">凭证号</view>
+        <view class="number">{{result.security_code?result.security_code:''}}</view>
+    </view>
+    <block wx:if="{{result.type == 1}}">
+        <view class="content">
+            <view class="list_item">
+                <label class="item_label">姓名</label>
+                <view class="item_value">{{result.name?result.name:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">登记时间</label>
+                <view class="item_value">{{result.created_at?result.created_at:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">手机号</label>
+                <view class="item_value">{{result.mobile?result.mobile:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">身份证号</label>
+                <view class="item_value">{{result.id_card?result.id_card:''}}</view>
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{result.type == 2}}">
+        <view class="content">
+            <view class="list_item">
+                <label class="item_label">地点</label>
+                <view class="item_value">{{result.place_name?result.place_name:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">姓名</label>
+                <view class="item_value">{{result.name?result.name:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">登记时间</label>
+                <view class="item_value">{{result.created_at?result.created_at:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">手机号</label>
+                <view class="item_value">{{result.mobile?result.mobile:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">身份证号</label>
+                <view class="item_value">{{result.id_card?result.id_card:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">体温</label>
+                <view class="item_value">{{result.point?result.point:''}}</view>
+            </view>
+        </view>
+        <view class="content" wx:if="{{result.tartget_name}}">
+            <view class="list_item">
+                <label class="item_label">受访人</label>
+                <view class="item_value">{{result.tartget_name?result.tartget_name:''}}</view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">受访人手机号</label>
+                <view class="item_value">{{result.tartget_mobile?result.tartget_mobile:''}}</view>
+            </view>
+        </view>
+    </block>
+    
+</block>
+<button class="back_index" bindtap="bindGoToindex">返回首页</button>

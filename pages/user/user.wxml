@@ -1,0 +1,210 @@
+<view class="header">
+    <view class="title" wx:if="{{state.has_information == 1}}">编辑基本信息</view>
+    <view class="title" wx:else>填写基本信息</view>
+    <view class="sub_title">首次使用，请准确完善个人信息</view>
+</view>
+<form bindsubmit="bindFormSubmit">
+    <view class="content">
+        <view class="list_item">
+            <label class="item_label">姓名</label>
+            <view class="item_value">
+                <input class="form_input width_flex" name="realname" value="{{realname}}" placeholder="请输入姓名" placeholder-class="placeholder" />
+            </view>
+        </view>
+        <view class="list_item">
+            <label class="item_label">性别</label>
+            <view class="item_value">
+                <radio-group name="sex">
+                    <radio class="sub_radio_left" value="1" checked="{{sex == '1'}}" color="#4f74de">
+                        <text class="sub_radio_txt">男</text>
+                    </radio>
+                    <radio class="sub_radio_left" value="0" checked="{{sex == '0'}}" color="#4f74de">
+                        <text class="sub_radio_txt">女</text>
+                    </radio>
+                </radio-group>
+            </view>
+        </view>
+        <view class="list_item">
+            <label class="item_label">年龄</label>
+            <view class="item_value">
+                <input class="form_input width_flex" type="number" name="age" value="{{age}}" placeholder="请输入您的年龄" placeholder-class="placeholder" />
+            </view>
+        </view>
+        <view class="list_item">
+            <label class="item_label">身份证号</label>
+            <view class="item_value">
+                <input class="form_input width_flex" type="idcard" maxlength="18" name="id_card" value="{{id_card}}" placeholder="请输入身份证号" placeholder-class="placeholder" />
+            </view>
+        </view>
+        <view class="list_item">
+            <view class="item_label">
+                <view>户籍地址</view>
+                <input class="form_input_cl" name="huji" value="{{huji}}" placeholder="请输入您的户籍地址" placeholder-class="placeholder" />
+            </view>
+        </view>
+        <view class="list_item">
+            <label class="item_label">手机号</label>
+            <view class="item_value">
+                <input class="form_input width_flex" type="number" maxlength="11" name="mobile" value="{{mobile}}" placeholder="请输入您的手机号" placeholder-class="placeholder" />
+            </view>
+        </view>
+        <!-- <view class="list_item">
+            <view class="item_label">
+                <view>常住地址</view>
+                <input class="form_input_cl" name="changzhu" value="{{changzhu}}" placeholder="请输入您的常住地址" placeholder-class="placeholder" />
+            </view>
+        </view>
+        <view class="list_item">
+            <view class="item_label">
+                <view>所属公司</view>
+                <input class="form_input_cl" name="company_name" value="{{company_name}}" placeholder="请输入您所属公司" placeholder-class="placeholder" />
+            </view>
+        </view> -->
+        <view class="list_item">
+            <label class="item_label">出行方式</label>
+            <view class="item_value">
+                    <picker bindchange="bindPickerChange" value="{{travelArray[hx_index].id}}" data-selecthx="{{travelArray[hx_index].name}}" range="{{travelArray}}" range-key="{{'name'}}">
+                        <block wx:if="{{travel_type == ''}}">
+                            <view class="picker_txt">请选择</view>
+                        </block>
+                        <block wx:else>
+                            <view class="picker_txt_select">{{travel_type_txt}}</view>
+                        </block>
+                    </picker>
+            </view>
+        </view>
+        <view class="list_item" wx:if="{{travel_type != ''}}">
+            <label class="item_label" wx:if="{{travel_type == '1'}}">火车信息</label>
+            <label class="item_label" wx:if="{{travel_type == '2'}}">航班信息</label>
+            <label class="item_label" wx:if="{{travel_type == '3'}}">汽车信息</label>
+            <label class="item_label" wx:if="{{travel_type == '4'}}">其他信息</label>
+            <view class="item_value">
+                <input class="form_input width_flex" name="travel_ext" value="{{travel_ext}}" placeholder="{{plact_text}}" placeholder-class="placeholder" />
+            </view>
+        </view>
+        <!-- <view class="list_item">
+            <label class="item_label">是否租房</label>
+            <view class="item_value">
+                <radio-group name="rent_house" bindchange="bindRadioGroup">
+                    <radio class="sub_radio_left" value="1" checked="{{rent_house == '1'}}" color="#4f74de">
+                        <text class="sub_radio_txt">是</text>
+                    </radio>
+                    <radio class="sub_radio_left" value="0" checked="{{rent_house == '0'}}" color="#4f74de">
+                        <text class="sub_radio_txt">否</text>
+                    </radio>
+                </radio-group>
+            </view>
+        </view> -->
+        <!-- <block wx:if="{{is_show_house}}">
+            <view class="list_item">
+                <label class="item_label">房东姓名</label>
+                <view class="item_value">
+                    <input class="form_input width_flex" name="house_owner_name" value="{{house_owner_name}}" placeholder="请输入房东姓名" placeholder-class="placeholder" />
+                </view>
+            </view>
+            <view class="list_item">
+                <label class="item_label">房东联系方式</label>
+                <view class="item_value">
+                    <input class="form_input width_flex" type="number" maxlength="11" name="house_owner_mobile" value="{{house_owner_mobile}}" placeholder="请输入房东联系方式" placeholder-class="placeholder" />
+                </view>
+            </view>
+        </block> -->
+        <view class="list_item">
+            <view class="item_label">
+                <view class="item_txt">是否发热与确认或疑似患者密切接触</view>
+                <radio-group name="input_1">
+                    <radio class="sub_radio" value="1" checked="{{input_1 == '1'}}" color="#4f74de">
+                        <text class="sub_radio_txt">是</text>
+                    </radio>
+                    <radio class="sub_radio" value="0" checked="{{input_1 == '0'}}" color="#4f74de">
+                        <text class="sub_radio_txt">否</text>
+                    </radio>
+                </radio-group>
+            </view>
+        </view>
+        <view class="list_item">
+            <view class="item_label">
+                <view class="item_txt">是否在本地隔离14天</view>
+                <radio-group name="input_2">
+                    <radio class="sub_radio" style="margin-right: 30rpx;" value="2" checked="{{input_2 == '2'}}" color="#4f74de">
+                        <text class="sub_radio_txt">未离开本市</text>
+                    </radio>
+                    <radio class="sub_radio" style="margin-right: 30rpx;" value="1" checked="{{input_2 == '1'}}" color="#4f74de">
+                        <text class="sub_radio_txt">已隔离</text>
+                    </radio>
+                    <radio class="sub_radio" style="margin-right: 0;" value="0" checked="{{input_2 == '0'}}" color="#4f74de">
+                        <text class="sub_radio_txt">未隔离</text>
+                    </radio>
+                </radio-group>
+            </view>
+        </view>
+        <view class="list_item">
+            <view class="item_label">
+                <view class="item_txt">是否去过武汉并与发热患者有过密切接触</view>
+                <radio-group name="input_3">
+                    <radio class="sub_radio" value="1" checked="{{input_3 == '1'}}" color="#4f74de">
+                        <text class="sub_radio_txt">是</text>
+                    </radio>
+                    <radio class="sub_radio" value="0" checked="{{input_3 == '0'}}" color="#4f74de">
+                        <text class="sub_radio_txt">否</text>
+                    </radio>
+                </radio-group>
+            </view>
+        </view>
+        <view class="list_item">
+            <view class="item_label">
+                <view class="item_txt">是否去过湖北武汉以外的其他地区</view>
+                <radio-group name="input_4">
+                    <radio class="sub_radio" value="1" checked="{{input_4 == '1'}}" color="#4f74de">
+                        <text class="sub_radio_txt">是</text>
+                    </radio>
+                    <radio class="sub_radio" value="0" checked="{{input_4 == '0'}}" color="#4f74de">
+                        <text class="sub_radio_txt">否</text>
+                    </radio>
+                </radio-group>
+            </view>
+        </view>
+    </view>
+    <!-- <view class="wrap">
+        <view class="hd_title">
+            <view class="hd_text">社区信息</view>
+            <view class="hd_button" bindtap="bindUserAddress">
+                <image class="{{is_user_address?'button_icon_rotate':'button_icon'}}" src="../images/arroy_button.png"></image>
+            </view>
+        </view>
+        <block wx:if="{{is_user_address}}">
+            <view class="padding_30">
+                <view class="list_item">
+                    <label class="item_label">常住地址</label>
+                    <view class="item_value">
+                        <input class="form_input_width" name="changzhu" value="{{changzhu}}" placeholder="请输入您的常住地址" placeholder-class="placeholder" />
+                    </view>
+                </view>
+                <view class="list_item">
+                    <label class="item_label">户籍地址</label>
+                    <view class="item_value">
+                        <input class="form_input_width" name="huji" value="{{huji}}" placeholder="请输入您的户籍地址" placeholder-class="placeholder" />
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view> -->
+    <!-- <view class="wrap">
+        <view class="hd_title">
+            <view class="hd_text">楼宇信息</view>
+            <view class="hd_button" bindtap="bindWorkOffice">
+                <image class="{{is_work_office?'button_icon_rotate':'button_icon'}}" src="../images/arroy_button.png"></image>
+            </view>
+        </view>
+        <view class="padding_30">
+            <view class="list_item" wx:if="{{is_work_office}}">
+                <label class="item_label">公司名称</label>
+                <view class="item_value">
+                    <input class="form_input_width" name="company_name" value="{{company_name}}" placeholder="请输入公司名称" placeholder-class="placeholder" />
+                </view>
+            </view>
+        </view>
+    </view> -->
+    <button class="submit_button" formType="submit" wx:if="{{is_submit}}">保存</button>
+    <button class="submit_button_loading" wx:else>保存</button>
+</form>

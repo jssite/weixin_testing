@@ -1,0 +1,56 @@
+.content{
+    width:690rpx;
+    margin: 30rpx auto;
+    padding: 0 30rpx;
+    box-sizing: border-box;
+    background:rgba(255,255,255,1);
+    box-shadow:0rpx 10rpx 20rpx 0rpx rgba(0,0,0,0.08);
+    border-radius:20rpx;
+}
+.record_item {
+    padding: 40rpx 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2rpx solid rgba(238,238,238,1);
+    border-radius:1px;
+}
+.record_item:last-child{
+    border-bottom: 0;
+}
+.record_name{
+    font-size: 32rpx;
+    line-height: 40rpx;
+    color: #222222;
+}
+.record_name.entry{
+    color: #6B8AE2;
+}
+.record_date {
+    padding-top: 20rpx;
+    font-size: 26rpx;
+    line-height: 32rpx;
+    color: #CCCCCC;
+}
+.record_entry{
+    width:16rpx;
+    height:16rpx;
+    margin-right: 10rpx;
+    border-radius:2rpx;
+    border-left: #888888 6rpx solid;
+    border-top: #888888 6rpx solid;
+    transform: rotate(135deg);
+}
+.no_data {
+    padding: 300rpx 0 0;
+    text-align: center;
+}
+.node_data_img {
+    width: 196rpx;
+    height: 128rpx;
+}
+.no_data_txt {
+    padding: 10rpx 0 0;
+    font-size: 28rpx;
+    color: #888888;
+}

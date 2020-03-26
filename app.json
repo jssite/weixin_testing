@@ -1,0 +1,19 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/user/user",
+        "pages/success/success",
+        "pages/record/record",
+        "pages/details/details",
+        "pages/leaving/leaving",
+        "pages/temperature/temperature",
+        "pages/privacy/privacy",
+        "pages/contract/contract"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTextStyle": "black"
+    },
+    "sitemapLocation": "sitemap.json"
+}

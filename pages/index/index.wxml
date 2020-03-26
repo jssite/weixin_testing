@@ -1,0 +1,154 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="header" style="padding-top:{{statusBarHeight}}px;">
+        <view class="header_title" style="height:{{titleBarHeight}}px; line-height: {{titleBarHeight}}px">抗疫助手</view>
+        <view class="header_sub_title">抗击新冠肺炎</view>
+        <view class="swiper_warp">
+            <swiper class="swiper_width" autoplay="true" circular="true" bindchange='bindSwiperChange'>
+                <block wx:for="{{banner}}" wx:key="index">
+                    <swiper-item>
+                        <view>
+                            <image class="image_width" mode="aspectFill" src="http://zfwy.oss-cn-beijing.aliyuncs.com/{{item.img_url}}"></image>
+                        </view>
+                    </swiper-item>
+                </block>
+            </swiper>
+            <view class="dots">
+                <block wx:for="{{banner}}" wx:key="index">
+                  <view class='dot {{swiperCurrent == index ? "active" : ""}}'></view>
+                </block>
+              </view>
+        </view>
+    </view>
+    <view class="content">
+        <!-- 用户信息 -->
+        <view class="user_info">
+            <block wx:if="{{state.has_mobile == 1}}">
+                <view class="user_wrap">
+                    <view class="user_photo">
+                        <open-data class="icon_size" type="userAvatarUrl"></open-data>
+                        <!-- <image class="icon_size" src="{{userInfo.avatarUrl}}"></image> -->
+                    </view>
+                    <view class="user_name"><open-data type="userNickName"></open-data></view>
+                    <!-- <view class="user_name">{{userInfo.nickName}}</view> -->
+                </view>
+            </block>
+            <button wx:else style="margin: 0;" class="user_wrap" hover-class="none" open-type="getPhoneNumber" bindgetphonenumber="bindUserAuthorized">
+                <view class="user_photo">
+                    <image class="icon_size" src="../images/user_photo@2x.png"></image>
+                </view>
+                <view class="user_name">未登录</view>
+            </button>
+            <block wx:if="{{state.has_mobile == 1}}">
+                <view class="user_add" bindtap="bindUserInfo" wx:if="{{state.has_information != 1}}">填写个人信息</view>
+                <view class="user_add" bindtap="bindUserInfo" wx:else>编辑个人信息</view>
+            </block>
+            <block wx:else>
+                <button style="margin: 0;" class="user_wrap" hover-class="none" open-type="getPhoneNumber" bindgetphonenumber="bindUserAuthorized">
+                    <view class="user_add">填写个人信息</view>
+                </button>
+            </block>
+        </view>
+        <!-- End -->
+        <!-- 导航列表 -->
+        <view class="menu">
+            <!-- 进入登记 -->
+            <button wx:if="{{state.has_mobile != 1}}" hover-class="none" open-type="getPhoneNumber" bindgetphonenumber="bindUserAuthorized">
+                <view class="menu_item">
+                    <view class="menu_icon">
+                        <image class="icon_size" src="../images/icon_1@2x.png"></image>
+                    </view>
+                    <view class="menu_title">
+                        <view class="menu_text">进入登记</view>
+                        <view class="menu_info">扫描二维码，快速进入</view>
+                    </view>
+                </view>
+            </button>
+            <view wx:else class="menu_item" bindtap="bindScanCode">
+                <view class="menu_icon">
+                    <image class="icon_size" src="../images/icon_1@2x.png"></image>
+                </view>
+                <view class="menu_title">
+                    <view class="menu_text">进入登记</view>
+                    <view class="menu_info">扫描二维码，快速进入</view>
+                </view>
+            </view>
+            <!-- Ennd -->
+            <!-- 离开登记 -->
+            <button wx:if="{{state.has_mobile != 1}}" hover-class="none" open-type="getPhoneNumber" bindgetphonenumber="bindUserAuthorized">
+                <view class="menu_item">
+                    <view class="menu_icon">
+                        <image class="icon_size" src="../images/icon_2@2x.png"></image>
+                    </view>
+                    <view class="menu_title">
+                        <view class="menu_text">离开登记</view>
+                        <view class="menu_info">扫描二维码，补充信息即可离开</view>
+                    </view>
+                </view>
+            </button>
+            <view wx:else class="menu_item" bindtap="bindLeaving">
+                <view class="menu_icon">
+                    <image class="icon_size" src="../images/icon_2@2x.png"></image>
+                </view>
+                <view class="menu_title">
+                    <view class="menu_text">离开登记</view>
+                    <view class="menu_info">扫描二维码，补充信息即可离开</view>
+                </view>
+            </view>
+            <!-- End -->
+            <!-- 出入历史记录 -->
+            <button wx:if="{{state.has_mobile != 1}}" hover-class="none" open-type="getPhoneNumber" bindgetphonenumber="bindUserAuthorized">
+                <view class="menu_item">
+                    <view class="menu_icon">
+                        <image class="icon_size" src="../images/icon_3@2x.png"></image>
+                    </view>
+                    <view class="menu_title">
+                        <view class="menu_text">出入历史记录</view>
+                        <view class="menu_info">查看我的历史记录</view>
+                    </view>
+                </view>
+            </button>
+            <view wx:else class="menu_item" bindtap="bindRecord">
+                <view class="menu_icon">
+                    <image class="icon_size" src="../images/icon_3@2x.png"></image>
+                </view>
+                <view class="menu_title">
+                    <view class="menu_text">出入历史记录</view>
+                    <view class="menu_info">查看我的历史记录</view>
+                </view>
+            </view>
+            <!-- End -->
+            <!-- 体温上报 -->
+            <button wx:if="{{state.has_mobile != 1}}" hover-class="none" open-type="getPhoneNumber" bindgetphonenumber="bindUserAuthorized">
+                <view class="menu_item">
+                    <view class="menu_icon">
+                        <image class="icon_size" src="../images/icon_4@2x.png"></image>
+                    </view>
+                    <view class="menu_title">
+                        <view class="menu_text">体温上报</view>
+                        <view class="menu_info">每天上报两次体温</view>
+                    </view>
+                </view>
+            </button>
+            <view wx:else class="menu_item" bindtap="bindTemperature">
+                <view class="menu_icon">
+                    <image class="icon_size" src="../images/icon_4@2x.png"></image>
+                </view>
+                <view class="menu_title">
+                    <view class="menu_text">体温上报</view>
+                    <view class="menu_info">每天上报两次体温</view>
+                </view>
+            </view>
+        </view>
+        <!-- End -->
+        <!-- End -->
+    </view>
+    <view class="footer">
+        <navigator url="/pages/privacy/privacy" open-type="navigate" hover-class="none">
+            <view class="footer_item">《隐私政策》</view>
+        </navigator>
+        <navigator url="/pages/contract/contract" open-type="navigate" hover-class="none">
+            <view class="footer_item">《用户服务协议》</view>
+        </navigator>
+    </view>
+</view>

@@ -1,0 +1,28 @@
+<view class="container">
+    <view class="no_data" wx:if="{{is_nodata == 2}}">
+        <view class="no_data_icon">
+            <image class="node_data_img" mode="aspectFill" src="../images/no_data.png" />
+        </view>
+        <view class="no_data_txt">暂无出入记录</view>
+    </view>
+    <view class="content" wx:if="{{is_nodata == 1}}">
+        <!-- Start -->
+        <block wx:for="{{lists}}" wx:key="index">
+            <navigator url="/pages/details/details?id={{item.id}}" open-type="navigate" hover-class="none">
+                <view class="record_item">
+                    <view class="record_left">
+                        <block wx:if="{{item.type == 1}}">
+                            <view class="record_name entry">{{item.name}} 进入登记</view>
+                        </block>
+                        <block wx:else>
+                            <view class="record_name'">{{item.name}} 离开登记</view>
+                        </block>
+                        <view class="record_date">{{item.created_at}}</view>
+                    </view>
+                    <view class="record_entry"></view>
+                </view>
+            </navigator>
+        </block>
+        <!-- End -->
+    </view>
+</view>

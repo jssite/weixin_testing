@@ -1,0 +1,27 @@
+<!--temperature.wxml-->
+<view class="container">
+    <view class="header_con">
+        <form bindsubmit="bindFormSubmit">
+            <view class="header_wrap">
+                <text class="header_text">当前体温</text>
+                <input class="header-input width_flex" type="digit" name="point" value="{{point}}" bindinput="bindInputChange" placeholder-class="placeholder" placeholder="请输入当前体温"/>
+            </view>
+            <button class="submit_button" formType="submit" wx:if="{{isValue}}">提交</button>
+            <button class="submit_submit_disbled" wx:else>提交</button>
+            <!-- <button class="submit_button_disbled" formType="submit">今日已达最大提交次数</button> -->
+        </form>
+    </view>
+    <view class="sub_title">体温记录</view>
+    <view class="no_data" wx:if="{{is_nodata == 2}}">
+        <view class="no_data_icon">
+            <image class="node_data_img" mode="aspectFill" src="../images/no_data.png" />
+        </view>
+        <view class="no_data_txt">暂无体温记录</view>
+    </view>
+    <view class="con_list" wx:if="{{is_nodata == 1}}">
+        <view class="list_item" wx:for="{{lists}}" wx:key="index">
+            <view class="list_item_temperature">体温 {{item.point}}</view>
+            <view class="list_item_date">{{item.created_at}}</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+/**app.wxss**/
+page {
+    background:rgba(248,248,248,1);
+  }
+.container{
+    overflow: auto;
+}
